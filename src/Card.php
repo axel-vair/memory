@@ -1,30 +1,97 @@
 <?php
-class Card // CLASSE QUI VA GERER LE MELANGE DES CARTES, L'AFFICHAGE, ET LES ETATS
+class Card // Classe qui va permettre de générer les cartes du jeu
 {
-    // ATTRIBUTS
-    public int $idCard;
-    public bool $states;
-    public string $display;
+    // Les cartes possèdent un id, une face, un dos, et un état.
+    private ?int $idCard; // L'id va permettre récupérer une carte en particulier
+    private ?string $face; // La carte possède une face qui va être affichée si la carte est cliquée et que son état initial aura changé. Cette face sera un lien vers l'image.
+    private ?string $dos; // La carte possède un dos qui va être affiché dans son état initial.
+    private ?bool $states; // La carte possède un booléen qui va permettre de flip la carte selon son état false/true
 
 
-    public function __construct($idCard)
-    {   // CONSTRUCTEUR QUI VA RECUPERER L'ID DE LA CARTE
-        $this->idCard = $idCard; // ON RECUPERE L'ID DE LA CARTE
-        $this->states = false; // ON INITIALISE L'ETAT DE LA CARTE A FALSE
-        $this->display = "B"; // ON AFFICHE LE BACK DE LA CARDE
+    public function __construct()
+    {   // On initialise les propriétés de la classe en null
 
-    }
-    public function getDisplay()
-    {   // METHODE QUI VA AFFICHER LA CARTE
-        if($this->states) { // SI L'ETAT DE LA CARTE EST TRUE
-            return $this->display = "F"; // ON AFFICHE LE FRONT DE LA CARTE
-        }
-            return $this->display; // SINON ON AFFICHE LE BACK DE LA CARTE
+        $this->idCard = null;
+        $this->face = null;
+        $this->dos = null;
+        $this->states = null;
 
     }
 
-    public function getIdcard()
-    {   // METHODE QUI VA RECUPERER L'ID DE LA CARTE
+    // Nos setters
+    /**
+     * @param int|null $idCard
+     * @return Card
+     */
+    public function setIdCard(?int $idCard): Card
+    {
+        $this->idCard = $idCard;
+        return $this;
+    }
+
+    /**
+     * @param string|null $face
+     * @return Card
+     */
+    public function setFace(?string $face): Card
+    {
+        $this->face = $face;
+        return $this;
+    }
+
+    /**
+     * @param string|null $dos
+     * @return Card
+     */
+    public function setDos(?string $dos): Card
+    {
+        $this->dos = $dos;
+        return $this;
+    }
+
+    /**
+     * @param bool|null $states
+     * @return Card
+     */
+    public function setStates(?bool $states): Card
+    {
+        $this->states = $states;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+
+    // Nos getters
+    public function getIdCard(): ?int
+    {
         return $this->idCard;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getFace(): ?string
+    {
+        return $this->face;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDos(): ?string
+    {
+        return $this->dos;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getStates(): ?bool
+    {
+        return $this->states;
+    }
+
+
 }

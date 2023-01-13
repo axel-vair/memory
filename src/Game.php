@@ -4,38 +4,37 @@ class Game extends Card // CLASSE QUI VA GERER LE JEU (DIFFICULTÉ, LE COUNT DE 
 {
     public $id;
     public $id_game;
-    public array $nb_de_paire;
+    public $nb_de_paire;
     public $count;
 
     public function __construct()
     {
-        $this->count = 0;
-        $this->nb_de_paire = [3, 6, 9];
     }
 
-    public function difficulty($nb_de_paire)
+    public function difficulty()
     {   // METHODE QUI VA GERER LA DIFFICULTÉ DU JEU
 
-        if($_POST['easy'] = $this->nb_de_paire[0]){ 
-            $a = $this->nb_de_paire[0];
-        }elseif ($_POST['medium'] = $this->nb_de_paire[1]){
-            $a = $this->nb_de_paire[1];
-        }elseif ($_POST['hard'] = $this->nb_de_paire[2]){
-            $a = $this->nb_de_paire[2];
-        }
-
     }
-    public function selectCard() // MÉTHODE POUR GÉNÉRER LE NOMBRE DE CARTES
-    {
-            for ($i = 1; $i <= 2; $i++) {
-                for ($j = 1; $j <= $a; $j++) {
-                    $list[] = $j;
-                }
+    public function board() // MÉTHODE POUR GÉNÉRER LE NOMBRE DE CARTES
+        {
+            $nbOfPair = 3;
+
+            $cards = [];
+            $count = 1;
+            for($i = 0; $i < $nbOfPair * 2; $i++){
+                $card = new Card();
+                $card
+                    ->setidCard($count++)
+                    ->setStates(false)
+                    ->setFace("img" . $i % $nbOfPair +1 . ".jpg")
+                    ->setDos("dos.jpg");
+               // shuffle($cards);
+                $cards[] = $card;
+
+
+
             }
-            shuffle($list);
-            echo "<pre>";
-            print_r($list);
-            echo "</pre>";
+            return $cards;
         }
 
         public function countTry()
@@ -43,11 +42,16 @@ class Game extends Card // CLASSE QUI VA GERER LE JEU (DIFFICULTÉ, LE COUNT DE 
 
         }
 
-        public
-        function countCardReturned()
+        public function cardReturned()
         {
+            if (isset($_GET['id'])) {
+
+                $_SESSION['cardflip'][] = $_GET['id'];
+                if (count($_SESSION['cardflip']) > 2) {
+                    $_SESSION['cardflip'] = [];
+                }
+            }
 
         }
-
 
 }

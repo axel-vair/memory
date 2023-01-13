@@ -10,8 +10,6 @@
 </head>
 </html>
 <?php
-
-
 session_start();
     if(isset($_POST['deconnexion'])){
         $deconnect = new User();
@@ -25,6 +23,7 @@ session_start();
     <nav>
         <ul>
             <li><a href='index.php'>Accueil</a></li>
+            <li><a href='game.php'>Memory</a></li>
             <li><a href='profil.php'>Profil</a></li>
             <li>
             <form method='post'><input type='submit' value='deconnexion' name='deconnexion'></form></li>
@@ -40,6 +39,7 @@ session_start();
     <nav>
         <ul>
             <li><a href='index.php'>Accueil</a></li>
+            <li><a href='game.php'>Memory</a></li>
             <li><a href='connexion.php'>Connexion</a></li>
             <li><a href='inscription.php'>Inscription</a></li>
         </ul>

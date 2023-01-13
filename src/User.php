@@ -71,6 +71,7 @@ class User
 
         if ($sql_verify_exe->rowCount() != 0) {
             $_SESSION['login'] = $login;
+            $_SESSION['list'] = $list; // On stocke la liste des cartes dans la session
             echo "Connexion réussie" . "<br>";
             header("Refresh:3; url=profil.php");
 

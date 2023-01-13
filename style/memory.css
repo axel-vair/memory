@@ -5,9 +5,18 @@
 
 }
 
+
 li {
     display: flex;
 
     list-style: none;
 
 }
+
+
+.card {
+    width: 13rem;
+    height: 16rem;
+
+}
+

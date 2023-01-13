@@ -1,28 +1,30 @@
 <?php
 
-include "includes/header.php";
-include "src/Card.php";
 include "src/User.php";
+include "src/Card.php";
 include "src/Game.php";
 include "src/Score.php";
+include "includes/header.php";
 
-$difficult = new Game;
-$difficult->difficulty($nb_de_paire);
-$display = new Card(1);
-
-$cards = new Game;
-$cards->selectCard();
+$board = new Game();
+$board->cardReturned();
+$cards = $board->board();
+$_SESSION['cards'] = !isset($_SESSION['cards']) ? $cards : $_SESSION['cards']; // Si session card n'est pas isset alors = $cards, sinon = $_SESSION
 
 
-if(isset($_POST['memory'])){
-    $flippedCard = $_POST['memory'];
-    if($flippedCard){
-        $display->states = true;
+foreach($_SESSION['cards'] as $key => $card) { // boucle pour l'état : si get id == l'idée de la carte cliquée alors on passe à true
+    if($_GET['id'] == $card->getIdCard()){
+        $card->setStates(true);
+        $_SESSION['compare'][] = $card;
+        echo "<pre>";
+        var_dump('compare',$_SESSION['compare']);
+        echo "</pre>";
     }
-    if($display->states === true){
-        $display->getDisplay();
+    if(count($_SESSION['compare']) > 1){
+        unset($_SESSION['compare']);
     }
 }
+
 ?>
 
 <!doctype html>
@@ -35,8 +37,28 @@ if(isset($_POST['memory'])){
     <title>Jeu Mémory</title>
 </head>
 <body>
-    <form id="memory" method="POST">
-        <button form="memory" type="submit"  name="memory" value="<?=$display->getIdcard() ;?>"> <?php echo $display->display; ?></button>
-    </form>
+
+<form method="POST">
+    <input type="submit" name="facile" value="easy">
+    <input type="submit" name="facile" value="medium">
+    <input type="submit" name="facile" value="hard">
+</form>
+
+
+<form method="GET">
+
+    <?php foreach ($_SESSION['cards'] as $key => $card) : ?>
+        <?php if ($card->getStates()) : ?> <!-- si l'état est a true alors on affiche la face -->
+            <a href="game.php?id=<?php echo $card->getIdCard() ?>"><img class="card" src="images/<?= $card->getFace(); ?>"></a>
+        <?php else : ?>
+            <a href="game.php?id=<?php echo $card->getIdCard() ?>"><img class="card" src="images/<?= $card->getDos(); ?>"></a>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
+
+
+</form>
 </body>
 </html>
+
+
