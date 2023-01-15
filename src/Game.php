@@ -42,16 +42,16 @@ class Game extends Card // CLASSE QUI VA GERER LE JEU (DIFFICULTÉ, LE COUNT DE 
 
         }
 
-        public function cardReturned()
-        {
-            if (isset($_GET['id'])) {
+     //   public function cardReturned()
+      //  {
+           // if (isset($_GET['id'])) {
 
-                $_SESSION['cardflip'][] = $_GET['id'];
-                if (count($_SESSION['cardflip']) > 2) {
-                    $_SESSION['cardflip'] = [];
-                }
-            }
+            //    if (count($_SESSION['cardflip']) > 2) {
+                //    $_SESSION['cardflip'] = [];
+                //    unset($_SESSION['cardflip']);
+               // }
+          //  }
 
-        }
+      //  }
 
 }

@@ -18,12 +18,12 @@ if(isset($_POST['deconnexion'])) {
     $user_deconnexion->disconnect();
 }
 
-if(isset($_POST['modifier'])){
-    $login = $_POST['login'];
-    $password = $_POST['password'];
-    $user_modification = new User();
-    $user_modification->update($login, $password);
-}
+//if(isset($_POST['modifier'])){
+   // $login = $_POST['login'];
+  //  $password = $_POST['password'];
+   // $user_modification = new User();
+   // $user_modification->update($login, $password);
+//}
 
 ?>
 
@@ -44,7 +44,7 @@ if(isset($_POST['modifier'])){
         </tbody>
 
     </table>
-    <button type="submit" value="modifier" name="modifier">Modifier</button>
+    <!--  <button type="submit" value="modifier" name="modifier">Modifier</button> -->
     <button type="submit" value="deconnexion" name="deconnexion">Déconnexion</button>
     <button type="submit" value="supprimer" name="supprimer">Supprimer</button>
 </form>

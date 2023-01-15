@@ -7,23 +7,29 @@ include "src/Score.php";
 include "includes/header.php";
 
 $board = new Game();
-$board->cardReturned();
+//$board->cardReturned();
 $cards = $board->board();
 $_SESSION['cards'] = !isset($_SESSION['cards']) ? $cards : $_SESSION['cards']; // Si session card n'est pas isset alors = $cards, sinon = $_SESSION
 
-
 foreach($_SESSION['cards'] as $key => $card) { // boucle pour l'état : si get id == l'idée de la carte cliquée alors on passe à true
-    if($_GET['id'] == $card->getIdCard()){
+    $id = $_GET['id'] ?? null;
+    if($_GET['id'] == $card->getIdCard()) {
         $card->setStates(true);
         $_SESSION['compare'][] = $card;
         echo "<pre>";
-        var_dump('compare',$_SESSION['compare']);
+        var_dump('card', $card);
         echo "</pre>";
-    }
-    if(count($_SESSION['compare']) > 1){
-        unset($_SESSION['compare']);
+
+        echo "<pre>";
+        var_dump('compare', $_SESSION['compare']);
+        echo "</pre>";
+
+        if(isset($_SESSION['compare']) && count($_SESSION['compare']) > 1){
+            unset($_SESSION['compare']);
+        }
     }
 }
+
 
 ?>
 
@@ -48,7 +54,7 @@ foreach($_SESSION['cards'] as $key => $card) { // boucle pour l'état : si get i
 <form method="GET">
 
     <?php foreach ($_SESSION['cards'] as $key => $card) : ?>
-        <?php if ($card->getStates()) : ?> <!-- si l'état est a true alors on affiche la face -->
+        <?php if ($card->getStates()) : ?> <!-- si l'état est à true alors on affiche la face -->
             <a href="game.php?id=<?php echo $card->getIdCard() ?>"><img class="card" src="images/<?= $card->getFace(); ?>"></a>
         <?php else : ?>
             <a href="game.php?id=<?php echo $card->getIdCard() ?>"><img class="card" src="images/<?= $card->getDos(); ?>"></a>
