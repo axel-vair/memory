@@ -14,8 +14,8 @@ class User
     function __construct()
     {
         $DB_DSN = 'mysql:host=localhost;dbname=memory';
-        $username = 'root';
-        $password_db = 'root';
+        $username = 'memory';
+        $password_db = '28%7Jl6mw';
 
         try {
             $options =

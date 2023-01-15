@@ -11,7 +11,9 @@ $board = new Game();
 $cards = $board->board();
 $_SESSION['cards'] = !isset($_SESSION['cards']) ? $cards : $_SESSION['cards']; // Si session card n'est pas isset alors = $cards, sinon = $_SESSION
 
+var_dump($_SESSION['cards'];
 $numberOfCardsTurned = 0;
+// INITIALISATION count tentative
 foreach($_SESSION['cards'] as $key => $card) { // boucle pour l'état : si get id == l'idée de la carte cliquée alors on passe à true
     $id = $_GET['id'] ?? null;
 
@@ -25,6 +27,7 @@ foreach($_SESSION['cards'] as $key => $card) { // boucle pour l'état : si get i
         }
 
         if(isset($_SESSION['compare']) && count($_SESSION['compare']) > 1){ // si compare est isset et que son count est supérieur à 1
+           // SESSION count tentative
             if($_SESSION['compare'][0]->getFace() != $_SESSION['compare'][1]->getFace()){ // si l'index 0 de compare est différent de l'index 1
                 $_SESSION['compare'][0]->setStates(false); //on repasse les états à false pour afficher le back
                 $_SESSION['compare'][1]->setStates(false);
